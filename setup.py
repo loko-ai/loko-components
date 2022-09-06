@@ -8,7 +8,7 @@ ppom=json.load(open("./ppom.json"))
 version=ppom['version']
 
 setuptools.setup(
-    name="loko-components",
+    name="loko-extensions",
     version=version,
     author="Live Tech",
     author_email="f.dantonio@ilivetech.it",

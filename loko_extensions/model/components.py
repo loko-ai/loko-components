@@ -1,4 +1,4 @@
-from loko_components.utils.pathutils import find_path
+from loko_extensions.utils.pathutils import find_path
 import json
 
 
