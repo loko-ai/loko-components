@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List
 
 from loko_extensions.utils.pathutils import find_path
 import json
@@ -153,7 +153,7 @@ class Component:
             description (str): The explanation of the component.
             inputs (List[Input]): The list of the component's inputs. Default: `[Input("input")]`
             outputs (List[Output]): The list of the component's outputs. Default: `[Output("output")]`
-            args (List[Union[Arg, Select, Dynamic]]): The visualized name. By default, it is set to the id value.
+            args (List[Arg]): The list of the component's arguments. Default: `None`
             configured (bool): Set to `False` if configurations are required. Default: `True`
         """
     def __init__(self, name, description="", inputs=None, outputs=None,args=None, configured=True):
