@@ -1,4 +1,7 @@
 import functools
+import json
+
+
 def extract_value_args(_request=None, file=False):
     """
             Decorator used to extract value and args from services.
@@ -12,9 +15,8 @@ def extract_value_args(_request=None, file=False):
 
                 >>> # using Sanic
                 >>> @bp.post('/files')
-                >>> @doc.consumes(doc.JsonBody({}), location="body")
                 >>> @extract_value_args(file=True)
-                >>> async def test(value, args):
+                >>> async def test(file, args):
 
             Args:
                 _request (werkzeug.local.LocalProxy): Flask request. Default: `None`
@@ -26,12 +28,14 @@ def extract_value_args(_request=None, file=False):
             request = _request or args[0]
             value = request.files['file'] if file else request.json.get('value')
             args = request.files['args'] if file else request.json.get('args')
-            ### flask ###
-            if file and _request:
-                args = args.read().decode()
-            ### sanic ###
-            elif file and not _request:
-                args = args[0].body.decode()
+            if file:
+                ### flask ###
+                if _request:
+                    args = args.read().decode()
+                ### sanic ###
+                else:
+                    args = args[0].body.decode()
+                args = json.loads(args)
             return f(value, args)
         return tmp
     return get_value_args

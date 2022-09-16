@@ -1,4 +1,4 @@
-loko_extensions
+API Reference
 ===============
 
 .. toctree::
