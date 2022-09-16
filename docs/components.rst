@@ -4,7 +4,7 @@ Components
 Get started with Components
 ---------------------------
 
-Components in loko are saved into:
+Components in LOKO AI are saved into:
 
 .. code-block:: console
 
@@ -12,7 +12,7 @@ Components in loko are saved into:
 
 You can create a new script into your project.
 
-For Example:
+For example:
 
 .. code-block:: console
 
@@ -44,7 +44,7 @@ Components' inputs are linked to your services. Let's create a new service into:
 
 If you want to change your services path, remember also to change it into your ``Dockerfile``.
 
-For Example:
+For example:
 
 >>> @bp.post('/myfirstservice')
 >>> @doc.consumes(doc.JsonBody({}), location="body")
@@ -70,13 +70,13 @@ You can now add :py:meth:`~loko_extensions.model.components.Input` and :py:meth:
 
 Arguments
 ----------------
-We saw in the first example a of *text* and *boolean* :py:meth:`~loko_extensions.model.components.Arg`.
+We saw in the first example of *text* and *boolean* :py:meth:`~loko_extensions.model.components.Arg`.
 Available types are: “text”, “boolean”, “number”, “path”, “files”.
 You can add arguments' explanation using ``description`` or ``helper``.
 In the first case you'll find the information symbol, in the second one the description will be explicitly written near
 to the argument name. ``group`` is used to group arguments into different tabs.
 
-Let's see an Example:
+Let's see an example:
 
 >>> model_name = Arg(name="model_name", type="text",
 >>>                  label="Model Name", helper="Helper text")
