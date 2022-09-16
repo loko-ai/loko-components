@@ -119,13 +119,13 @@ Run the last script (e.g. `Home/loko/projects/<yourprojectname>/business/create_
 Use `crtl-R` to refresh the application and you'll find the new block: ``My First Component``. You can drag and drop
 the component into your project and use it!
 
-.. image:: ./imgs/loko4.png
+.. image:: https://raw.githubusercontent.com/loko-ai/doc_resources/main/loko_extensions/imgs/loko4.png
   :width: 700
   :align: center
 
 You can finally open the ``Logs`` tab and check that everything is working fine.
 
-.. image:: ./imgs/loko5.png
+.. image:: https://raw.githubusercontent.com/loko-ai/doc_resources/main/loko_extensions/imgs/loko5.png
   :width: 700
   :align: center
 

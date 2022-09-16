@@ -29,7 +29,7 @@ When you run the script, it'll update your file ``components.json``.
 If you open your project using Loko, you'll find your first component: ``My First Component``.
 You can drag and drop the component into your project and double click on it.
 
-.. image:: ./imgs/loko.png
+.. image:: https://raw.githubusercontent.com/loko-ai/doc_resources/main/loko_extensions/imgs/loko.png
   :width: 700
   :align: center
 
@@ -99,7 +99,7 @@ Let's see an example:
 In this case we'll have two different tabs: *Fit Parameters* and *Predict Parameters*.
 You can use ``value`` to set default value for the argument.
 
-.. image:: ./imgs/loko2.png
+.. image:: https://raw.githubusercontent.com/loko-ai/doc_resources/main/loko_extensions/imgs/loko2.png
   :width: 700
   :align: center
 
@@ -112,7 +112,7 @@ Example:
 >>> comp1 = Component(name="ML Component", args=[task])
 >>> save_extensions([comp1])
 
-.. image:: ./imgs/loko3.png
+.. image:: https://raw.githubusercontent.com/loko-ai/doc_resources/main/loko_extensions/imgs/loko3.png
   :width: 700
   :align: center
 
