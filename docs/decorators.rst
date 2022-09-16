@@ -100,8 +100,10 @@ When you use Sanic ``_request`` is None.
 
 Services must run on host ``"0.0.0.0"`` and port ``8080``.
 
-``args`` is a dictionary containing the component's confuguration. In this example we also have to create a component
-containing argument ``n`` (see the previous section :ref:`Components`)
+``args`` is a dictionary containing the component's confuguration.
+
+In this example we also have to create a component containing argument ``n``
+(see the previous section :ref:`Components`)
 
 >>> from loko_extensions.model.components import Arg, Component, save_extensions, Input, Output, Select, Dynamic
 >>>
@@ -112,4 +114,18 @@ containing argument ``n`` (see the previous section :ref:`Components`)
 >>> comp1 = Component(name='My First Component', args=[n], inputs=[input, input_f], outputs=[output])
 >>> save_extensions([comp1])
 
+Run the last script (e.g. `Home/loko/projects/<yourprojectname>/business/create_components.py`) to update the
+``components.json`` file. Then on Loko run your project in order to build and execute the new component's image.
+Use `crtl-R` to refresh the application and you'll find the new block: ``My First Component``. You can drag and drop
+the component into your project and use it!
+
+.. image:: ./imgs/loko4.png
+  :width: 700
+  :align: center
+
+You can finally open the ``Logs`` tab and check that everything is working fine.
+
+.. image:: ./imgs/loko5.png
+  :width: 700
+  :align: center
 
