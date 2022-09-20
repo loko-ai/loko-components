@@ -126,19 +126,22 @@ class Dynamic(Arg):
                     language used in this case is JavaScript.
                 label (str): The visualized name. By default, it is set to the name value.
                 dynamicType (str): The parameter's type. Available types are: "text", "boolean", "number", "path",
-                    "files". Default: `"text"`
+                    "files", "select". Default: `"text"`
+                options (list): The list of available parameter's options. Use this parameter only if dynamicType is
+                    "select". Default: None
                 helper (str): The explanation of the parameter usage.
                 description (str): The explanation of the parameter usage. In this case it'll be displayed by clicking
                     on the "i" icon.
                 group (str): The name of the parameter's section. It's used to divide parameters into groups.
                 value: The default value of the parameter.
                 """
-    def __init__(self, name, parent, condition, label=None, dynamicType="text", helper="", description="",
+    def __init__(self, name, parent, condition, label=None, dynamicType="text", options=None, helper="", description="",
                  group="", value=None):
         super().__init__(name, "dynamic", label, helper, description, group, value)
         self.parent = parent
         self.condition = condition
         self.dynamicType = dynamicType
+        self.options = options
 
 class Component:
     """
@@ -151,14 +154,16 @@ class Component:
         Args:
             name (str): The name of the component.
             description (str): The explanation of the component.
+            group (str): The section name in the sidebar. Default: `Custom`
             inputs (List[Input]): The list of the component's inputs. Default: `[Input("input")]`
             outputs (List[Output]): The list of the component's outputs. Default: `[Output("output")]`
             args (List[Arg]): The list of the component's arguments. Default: `None`
             configured (bool): Set to `False` if configurations are required. Default: `True`
         """
-    def __init__(self, name, description="", inputs=None, outputs=None,args=None, configured=True):
+    def __init__(self, name, description="", group="Custom", inputs=None, outputs=None,args=None, configured=True):
         self.name = name
         self.description = description
+        self.group = group
         self.inputs = inputs or [Input("input")]
         self.outputs = outputs or [Output("output")]
         self.args = args or []
@@ -166,9 +171,9 @@ class Component:
 
     def to_dict(self):
         values = {x.name: x.value for x in self.args if x.value}
-        options = dict(group="Custom", icon="RiTyphoonFill", click=None, values=values,
+        options = dict(icon="RiTyphoonFill", click=None, values=values,
                        args=[x.__dict__ for x in self.args])
-        return dict(name=self.name, description=self.description, configured=self.configured,
+        return dict(name=self.name, description=self.description, group=self.group, configured=self.configured,
                     inputs=[x.__dict__ for x in self.inputs],
                     outputs=[x.__dict__ for x in self.outputs], options=options)
 

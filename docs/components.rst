@@ -21,12 +21,12 @@ For example:
 >>> from loko_extensions.model.components import Arg, Component, save_extensions
 >>> model_name = Arg(name="model_name", type="text", label="Model Name", helper="Helper text")
 >>> train = Arg(name="train", type="boolean", label="Train Model", description="Helper text")
->>> comp1 = Component(name="My First Component", args=[model_name, train])
+>>> comp1 = Component(name="My First Component", args=[model_name, train], group="Custom")
 >>> save_extensions([comp1])
 
 When you run the script, it'll update your file ``components.json``.
 
-If you open your project using Loko, you'll find your first component: ``My First Component``.
+If you open your project using Loko, you'll find in the `Custom` section of the sidebar your first component: ``My First Component``.
 You can drag and drop the component into your project and double click on it.
 
 .. image:: https://raw.githubusercontent.com/loko-ai/doc_resources/main/loko_extensions/imgs/loko.png
