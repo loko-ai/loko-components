@@ -141,9 +141,13 @@ class Dynamic(Arg):
                     language used in this case is JavaScript.
                 label (str): The visualized name. By default, it is set to the name value.
                 dynamicType (str): The parameter's type. Available types are: "text", "boolean", "number", "path",
-                    "files", "directories", "code", "password", "email", "area", "select". Default: `"text"`
+                    "files", "directories", "code", "password", "email", "area", "select", "asyncSelect",
+                    "multiKeyValue". Default: `"text"`
                 options (list): The list of available parameter's options. Use this parameter only if dynamicType is
                     "select". Default: None
+                url (str): GET request's url. Use this parameter only if dynamicType is "asyncSelect". Default: None
+                fields (List[MKVField]): The list of fields. Use this parameter only if dynamicType is "multiKeyValuet".
+                    Default: None
                 helper (str): The explanation of the parameter usage.
                 description (str): The explanation of the parameter usage. In this case it'll be displayed by clicking
                     on the "i" icon.
@@ -151,13 +155,21 @@ class Dynamic(Arg):
                 value: The default value of the parameter.
                 required (bool): `True` if the parameter is required. Default: `False`
                 """
-    def __init__(self, name, parent, condition, label=None, dynamicType="text", options=None, helper="", description="",
-                 group="", value=None, required=False):
+    def __init__(self, name, parent, condition, label=None, dynamicType="text", options=None, url=None, fields=None,
+                 helper="", description="", group="", value=None, required=False):
         super().__init__(name, "dynamic", label, helper, description, group, value, required)
         self.parent = parent
         self.condition = condition
         self.dynamicType = dynamicType
         self.options = options
+        self.fields = fields
+        self.url = url
+
+    def to_dict(self):
+        d = super().to_dict()
+        if d['fields']:
+            d['fields'] = [f.__dict__ for f in d['fields']]
+        return d
 
 class MKVField:
     """
