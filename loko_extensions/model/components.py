@@ -146,7 +146,7 @@ class Dynamic(Arg):
                 options (list): The list of available parameter's options. Use this parameter only if dynamicType is
                     "select". Default: None
                 url (str): GET request's url. Use this parameter only if dynamicType is "asyncSelect". Default: None
-                fields (List[MKVField]): The list of fields. Use this parameter only if dynamicType is "multiKeyValuet".
+                fields (List[MKVField]): The list of fields. Use this parameter only if dynamicType is "multiKeyValue".
                     Default: None
                 helper (str): The explanation of the parameter usage.
                 description (str): The explanation of the parameter usage. In this case it'll be displayed by clicking
@@ -272,6 +272,31 @@ class AsyncSelect(Arg):
         super().__init__(name, "asyncSelect", label, helper, description, group, value, required)
         self.url = url
 
+class Events:
+    """
+            Component events. They are used to display the status of the component.
+                See also: :py:meth:`~loko_extensions.model.components.Component`.
+
+            Example:
+                >>> show_events = Arg(name='show_events', label='Show Events', type='boolean', value=True)
+                >>> comp1 = Component(name='comp1', args=[show_events], events=Events(type='test', field='show_events'))
+                >>> save_extensions([comp1])
+
+                you can send messages using:
+
+                >>> import requests
+                >>> msg = dict(event_name='event_ds4biz', content=dict(msg='Hello!', type='test', name=True))
+                >>> requests.post('http://gateway:8080/emit', json=msg)
+
+            Args:
+                type (str): Name to identify messages. It must be the same of the one sent in the emit request.
+                field (str): The name of the component argument it depends on. You'll visualize messages depending on
+                    its value.
+                """
+    def __init__(self, type, field):
+        self.type = type
+        self.field = field
+
 class Component:
     """
         A customized Loko component.
@@ -289,12 +314,14 @@ class Component:
             args (List[Arg]): The list of the component's arguments. Default: `None`
             trigger (bool): Set to `True` to enable start. Default: `False`
             configured (bool): `False` if configurations are required. Default: `True`
-            icon (str): The component's icon. Available values: `react-icons/ri <https://react-icons.github.io/react-icons/icons?name=ri>`_.
-                        Default: `"RiCheckboxBlankCircleFill"`
+            icon (str): The component's icon. Available values:
+                `react-icons/ri <https://react-icons.github.io/react-icons/icons?name=ri>`_.
+                Default: `"RiCheckboxBlankCircleFill"`
+            events (Events): This field is used to visualize the component status. Default: `None`
 
         """
     def __init__(self, name, description="", group="Custom", inputs=None, outputs=None, args=None, trigger=False,
-                 configured=True, icon="RiCheckboxBlankCircleFill"):
+                 configured=True, icon="RiCheckboxBlankCircleFill", events=None):
         self.name = name
         self.description = description
         self.group = group
@@ -303,6 +330,7 @@ class Component:
         self.args = args or []
         self.icon = icon
         self.click = "Send message" if trigger else None
+        self.events = events
 
         self.configured = configured
 
@@ -311,6 +339,7 @@ class Component:
         options = dict(values=values, args=[x.to_dict() for x in self.args])
         return dict(name=self.name, description=self.description, group=self.group,
                     icon=self.icon, click=self.click,
+                    events=self.events.__dict__ if self.events else None,
                     configured=self.configured,
                     inputs=[x.__dict__ for x in self.inputs],
                     outputs=[x.__dict__ for x in self.outputs], options=options)
