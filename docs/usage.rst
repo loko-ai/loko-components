@@ -10,7 +10,7 @@ To use Loko Extensions, first install it using pip:
    (.venv) $ pip install loko-extensions
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Tutorial
 
    components

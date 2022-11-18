@@ -1,7 +1,7 @@
 loko\_extensions
 =================================
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
 
    loko_extensions.business
    loko_extensions.model

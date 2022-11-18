@@ -1,9 +1,9 @@
-loko\_extensions.business
-=================================
+business
+========
 
 
-loko\_extensions.business.decorators module
--------------------------------------------
+decorators
+-----------
 
 .. automodule:: loko_extensions.business.decorators
    :members:

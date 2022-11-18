@@ -1,9 +1,9 @@
-loko\_extensions.model
-==============================
+model
+=======
 
 
-loko\_extensions.model.components module
--------------------------------------------
+components
+-----------
 
 .. automodule:: loko_extensions.model.components
    :members:
