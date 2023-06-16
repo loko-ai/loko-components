@@ -18,7 +18,7 @@ setuptools.setup(
     version=version,
     author="Live Tech",
     author_email="f.dantonio@ilivetech.it",
-    description="",
+    description="A framework for Loko extensions",
     long_description=get_long_description(),
     python_requires='>3.5.0',
     long_description_content_type="text/markdown",

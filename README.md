@@ -1,11 +1,11 @@
-<html><p><img style="vertical-align: middle;" src="https://user-images.githubusercontent.com/30443495/196493267-c328669c-10af-4670-bbfa-e3029e7fb874.png" width="8%" align="left" /></p>
-<h1>&nbsp; Loko - Extensions</h1><br></html>
+<p><img style="vertical-align: middle;" src="https://user-images.githubusercontent.com/30443495/196493267-c328669c-10af-4670-bbfa-e3029e7fb874.png" width="8%" align="left" /></p>
+<h1>&nbsp; Loko - Extensions</h1><br>
 
 **Loko Extensions** helps in writing LoKo's **custom components**.
 
-<b><ins>[Docs](https://loko-extensions.readthedocs.io/en/latest/)</ins></b> | 
-<b><ins>[Tutorial](https://loko-extensions.readthedocs.io/en/latest/usage.html)</ins></b> | 
-<b><ins>[LoKo AI](https://loko-ai.com/)</ins></b>
+<b>[Docs](https://loko-extensions.readthedocs.io/en/latest/)</b> | 
+<b>[Tutorial](https://loko-extensions.readthedocs.io/en/latest/usage.html)</b> | 
+<b>[LoKo AI](https://loko-ai.com/)</b>
 
 ### Installation
 
