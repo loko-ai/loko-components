@@ -2,10 +2,13 @@ Decorators
 ==========
 
 In order to link the Loko's components to your services you have to create ``POST`` methods.
-You can use :py:meth:`~loko_extensions.business.decorators.extract_value_args` to extract value and args from services.
-It works both with Flask and Sanic frameworks.
+Depending on the selected web framework, you can utilize the decorator :py:meth:`~loko_extensions.business.decorators.extract_value_args` if using Sanic or Flask, or the decorator :py:meth:`~loko_extensions.business.decorator_fastapi.ExtractValueArgsFastAPI` for FastAPI, to extract value and args from services.
+
+
+
 
 Example:
+
 
 .. code-block:: python
 
@@ -15,9 +18,7 @@ Example:
     from flask import Flask, request, jsonify
     from loko_extensions.business.decorators import extract_value_args
 
-    from utils.logger_utils import stream_logger
-
-    logger = stream_logger(__name__)
+    from loguru import logger
 
     app = Flask("")
 
@@ -54,9 +55,8 @@ Example:
     from sanic_openapi import swagger_blueprint
 
     from loko_extensions.business.decorators import extract_value_args
-    from utils.logger_utils import stream_logger
+    from loguru import logger
 
-    logger = stream_logger(__name__)
 
     def get_app(name):
        app = Sanic(name)
@@ -101,7 +101,46 @@ Example:
 
 When you use Sanic ``_request`` is None.
 
-Services must run on host ``"0.0.0.0"`` and port ``8080``.
+.. code-block:: python
+
+    # using FastAPI
+    import json
+    from loguru import logger
+    from fastapi import FastAPI
+    from fastapi.responses import JSONResponse
+
+    from loko_extensions.business.decorators import extract_value_args
+
+
+    app = FastAPI()
+
+    @app.post('/my_first_service', response_class=JSONResponse)
+    @ExtractValueArgsFastAPI()
+    def f(value, args):
+        logger.debug(f'ARGS: {args}')
+        logger.debug(f'JSON: {value}')
+        n = int(args.get('n', 10))
+        return JSONResponse(dict(msg=f"{'#'*n} Hello world! {'#'*n}"))
+
+    @app.post('/upload_file', response_class=JSONResponse)
+    @ExtractValueArgsFastAPI(file=True)
+    def f2(file, args):
+        logger.debug(f'ARGS: {args}')
+        logger.debug(f'JSON: {file.filename}')
+        file_content = file.file.read()
+        n = int(args.get('n', 10))
+        return JSONResponse(dict(msg=f"{'#'*n} You have uploaded the file: {file.filename}! {'#'*n}"))
+
+    if __name__ == "__main__":
+        uvicorn.run(app, host="0.0.0.0", port=8080)
+
+
+Services must run on host ``"0.0.0.0"`` and the default port is ``8080``. If you prefer to use a different port, such as 8090 for example, you have to include the following command in the Dockerfile document:
+
+.. code-block:: Dockerfile
+
+    EXPOSE 8090
+
 
 ``args`` is a dictionary containing the component's confuguration.
 
